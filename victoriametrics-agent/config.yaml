@@ -1,0 +1,12 @@
+name: VictoriaMetrics Agent Addon for Home Assistant
+version: "0.1"
+slug: victoriametrics_agent
+description: VictoriaMetrics Agent Addon for Home Assistant
+url: "https://github.com/ThePnx/home-assistant-addon-victoriametrics-agent"
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+init: false
