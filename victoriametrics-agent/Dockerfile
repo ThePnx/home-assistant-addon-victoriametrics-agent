@@ -10,4 +10,4 @@ COPY rootfs /
 COPY --from=vmagent /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 EXPOSE 8429
 ENTRYPOINT ["/vmagent-prod"]
-COPY ./vmagent-prod ./vmagent-prod
+COPY --from=vmagent ./vmagent-prod ./vmagent-prod
