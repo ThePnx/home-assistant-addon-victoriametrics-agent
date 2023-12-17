@@ -1,0 +1,1 @@
+# VictoriaMetrics Agent Addon for Home Assistant
