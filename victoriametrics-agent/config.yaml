@@ -30,5 +30,3 @@ schema:
     enabled: bool
     config: "str?"
     config.strictParse: bool
-
-image: "ghcr.io/home-assistant/{arch}-addon-example"
