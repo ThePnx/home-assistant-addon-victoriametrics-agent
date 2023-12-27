@@ -1,0 +1,9 @@
+configuration:
+  remoteWrite.url:
+    name: Remote Write URL
+    description:  Prometheus-compatible remote storage endpoint such as VictoriaMetrics, where to send the data to.
+  promscrape.enabled:
+    name: Enable or disable Prometheus config file usage.
+  promscrape.config:
+    name: The path to Prometheus config file.
+    description: The path can point either to local file or to http url. vmagent doesn't support some sections of Prometheus config file, so you may need either to delete these sections or to run vmagent with -promscrape.config.strictParse=false command-line flag. In this case vmagent ignores unsupported sections. See the list of unsupported sections - https://docs.victoriametrics.com/vmagent.html#unsupported-prometheus-config-sections
