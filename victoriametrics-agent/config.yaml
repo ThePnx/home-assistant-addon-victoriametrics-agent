@@ -10,3 +10,25 @@ arch:
   - amd64
   - i386
 init: false
+
+map:
+  - share:rw
+
+options:
+  remoteWrite:
+    url: "https://victoria-metrics-host:8428/api/v1/write"
+  promscrape:
+    enabled: false
+    config: /path/to/prometheus.yml
+    config.strictParse: true
+
+
+schema:
+  remoteWrite:
+    url: "str?"
+  promscrape:
+    enabled: bool
+    config: "str?"
+    config.strictParse: bool
+
+image: "ghcr.io/home-assistant/{arch}-addon-example"
