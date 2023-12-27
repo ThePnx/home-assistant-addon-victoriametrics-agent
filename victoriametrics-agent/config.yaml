@@ -10,13 +10,17 @@ arch:
   - amd64
   - i386
 init: false
+webui: "http://[HOST]:[PORT:8429]/metrics"
+
+ports:
+  8429/tcp: 8429
 
 map:
   - share:rw
 
 options:
   remoteWrite:
-    url: "https://127.0.0.1:8428/api/v1/write"
+    url: "http://[victoriametrics-host-ip]/api/v1/write"
   promscrape:
     enabled: false
     config: /path/to/prometheus.yml
