@@ -4,10 +4,47 @@
 # s6-overlay docs: https://github.com/just-containers/s6-overlay
 # ==============================================================================
 
+declare -a options
+
 REMOTE_WRITE_URL=$(bashio::config 'remoteWrite.url')
 #PROMSCRAPE_CONFIG_FILE_PATH=$(bashio::config 'promscrape.config')
 
-bashio::log.info "Starting VictoriaMetrics vmagent with remoteWrite.url=${REMOTE_WRITE_URL}"
+bashio::log.info "Starting VictoriaMetrics vmagent..."
+
+if bashio::config.true 'promscrape.enabled'; then
+    options+=("-promscrape.config=$(bashio::config 'promscrape.config')")
+    options+=("-promscrape.config.strictParse=$(bashio::config 'promscrape.config.strictParse')")
+    bashio::log.info "promscrape.config enabled, options set: -promscrape.config=$(bashio::config 'promscrape.config'), -promscrape.config.strictParse=$(bashio::config 'promscrape.config.strictParse')"
+else
+    options+=("-remoteWrite.url=$(bashio::config 'remoteWrite.url')")
+    bashio::log.info "remoteWrite.url enabled, option set: -remoteWrite.url=$(bashio::config 'remoteWrite.url')"
+fi
+
+if bashio::config.true 'httpAuth.enabled'; then
+  options+=("-httpAuth.username=$(bashio::config httpAuth.username)")
+  options+=("-httpAuth.password=$(bashio::config httpAuth.password)")
+  bashio::log.info "httpAuth enabled, options set: -httpAuth.username=$(bashio::config httpAuth.username), -httpAuth.password=hidden"
+fi
+
+if bashio::config.has_value 'httpListenAddr.tcp'; then
+  options+=("-httpListenAddr=$(bashio::config httpListenAddr.tcp)")
+  bashio::log.info "httpListenAddr enabled, option set: -httpListenAddr=$(bashio::config httpListenAddr.tcp)"
+fi
+
+if bashio::config.has_value 'httpListenAddr.useProxyProtocol'; then
+  options+=("-httpListenAddr.useProxyProtocol=$(bashio::config httpListenAddr.useProxyProtocol)")
+  bashio::log.info "httpListenAddr.useProxyProtocol enabled, option set: -httpListenAddr.useProxyProtocol=$(bashio::config httpListenAddr.useProxyProtocol)"
+fi
+
+if bashio::config.true 'tls.enabled'; then
+  options+=("-tls")
+  options+=("-tlsCertFile=$(bashio::config tls.certFile)")
+  options+=("-tlsKeyFile=$(bashio::config tls.keyFile)")
+  options+=("-tlsMinVersion=$(bashio::config tls.minVersion)")
+  bashio::log.info "TLS enabled, options set: -tls, -tlsCertFile=$(bashio::config tls.certFile), -tlsKeyFile=$(bashio::config tls.keyFile), -tlsMinVersion=$(bashio::config tls.minVersion)"
+fi
+
+bashio::log.info "Options: ${options[@]}"
 
 ## Run your program
-exec /vmagent-prod "-remoteWrite.url=${REMOTE_WRITE_URL}"
+exec /vmagent-prod  "${options[@]}"

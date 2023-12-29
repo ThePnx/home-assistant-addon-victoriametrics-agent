@@ -21,16 +21,47 @@ map:
 options:
   remoteWrite:
     url: "http://[victoriametrics-host-ip]/api/v1/write"
+
   promscrape:
     enabled: false
-    config: /path/to/prometheus.yml
+    config: "/path/to/prometheus.yml"
     config.strictParse: true
 
+  httpAuth:
+    enabled: false
+    username: ""
+    password: ""
+
+  httpListenAddr:
+    tcp: ""
+    useProxyProtocol: ""
+
+  tls:
+    enabled: false
+    certFile: "/path/to/cert/file"
+    keyFile: "/path/to/key/file"
+    minVersion: "TLS13"
 
 schema:
   remoteWrite:
-    url: "str?"
+    url: str?
+
   promscrape:
     enabled: bool
-    config: "str?"
+    config: str?
     config.strictParse: bool
+
+  httpAuth:
+    enabled: bool
+    username: str?
+    password: password?
+
+  httpListenAddr:
+    tcp: str?
+    useProxyProtocol: str?
+
+  tls:
+    enabled: bool
+    certFile: str?
+    keyFile: str?
+    minVersion: str?
