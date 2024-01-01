@@ -4,6 +4,38 @@ configuration:
   remoteWrite.url:
     name: Remote Write URL
     description: Prometheus-compatible remote storage endpoint such as VictoriaMetrics, where to send the data to.
+  remoteWrite.authentication.enabled:
+    name: Enable authentication
+  remoteWrite.basicAuth.username:
+    name: Basic auth username
+    description: Optional basic auth username to use for the corresponding -remoteWrite.url
+  remoteWrite.basicAuth.password:
+    name: Basic auth password
+    description: Optional basic auth password to use for the corresponding -remoteWrite.url
+  remoteWrite.basicAuth.passwordFile:
+    name: Path to basic auth password file
+    description: Optional path to basic auth password to use for the corresponding -remoteWrite.url. The file is re-read every second
+  remoteWrite.bearerToken:
+    name: Bearer auth token
+    description: Optional bearer auth token to use for the corresponding -remoteWrite.url
+  remoteWrite.bearerTokenFile:
+    name: Path to bearer token file
+    description: Optional path to bearer token file to use for the corresponding -remoteWrite.url. The token is re-read from the file every second
+  remoteWrite.tlsCAFile:
+    name: Path to TLS CA file
+    description: Optional path to TLS CA file to use for verifying connections to the corresponding -remoteWrite.url. By default, system CA is used
+  remoteWrite.tlsCertFile:
+    name: Path to client-side TLS certificate file
+    description: Optional path to client-side TLS certificate file to use when connecting to the corresponding -remoteWrite.url
+  remoteWrite.tlsInsecureSkipVerify:
+    name: Skip tls verification
+    description:  Whether to skip tls verification when connecting to the corresponding -remoteWrite.url
+  remoteWrite.tlsKeyFile:
+    name:  Path to client-side TLS certificate key file
+    description: Optional path to client-side TLS certificate key to use when connecting to the corresponding -remoteWrite.url
+  remoteWrite.tlsServerName:
+    name: TLS server name
+    description: Optional TLS server name to use for connections to the corresponding -remoteWrite.url. By default, the server name from -remoteWrite.url is used
 
   promscrape.enabled:
     name: Enable Prometheus config file usage

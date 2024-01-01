@@ -6,34 +6,84 @@
 
 declare -a options
 
-REMOTE_WRITE_URL=$(bashio::config 'remoteWrite.url')
-#PROMSCRAPE_CONFIG_FILE_PATH=$(bashio::config 'promscrape.config')
-
 bashio::log.info "Starting VictoriaMetrics vmagent..."
 
 if bashio::config.true 'promscrape.enabled'; then
     options+=("-promscrape.config=$(bashio::config 'promscrape.config')")
     options+=("-promscrape.config.strictParse=$(bashio::config 'promscrape.config.strictParse')")
-    bashio::log.info "promscrape.config enabled, options set: -promscrape.config=$(bashio::config 'promscrape.config'), -promscrape.config.strictParse=$(bashio::config 'promscrape.config.strictParse')"
+    bashio::log.debug "promscrape.config enabled, options set: -promscrape.config=$(bashio::config 'promscrape.config'), -promscrape.config.strictParse=$(bashio::config 'promscrape.config.strictParse')"
 else
     options+=("-remoteWrite.url=$(bashio::config 'remoteWrite.url')")
-    bashio::log.info "remoteWrite.url enabled, option set: -remoteWrite.url=$(bashio::config 'remoteWrite.url')"
+    bashio::log.debug "remoteWrite.url enabled, option set: -remoteWrite.url=$(bashio::config 'remoteWrite.url')"
+fi
+
+if bashio::config.true 'remoteWrite.authentication.enabled'; then
+
+  if bashio::config.has_value 'remoteWrite.basicAuth.username'; then
+    options+=("-remoteWrite.basicAuth.username=$(bashio::config remoteWrite.basicAuth.username)")
+     bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.basicAuth.username=$(bashio::config remoteWrite.basicAuth.username)"
+  fi
+
+  if bashio::config.has_value 'remoteWrite.basicAuth.password'; then
+    options+=("-remoteWrite.basicAuth.password=$(bashio::config remoteWrite.basicAuth.password)")
+     bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.basicAuth.password=secret"
+  fi
+
+  if bashio::config.has_value 'remoteWrite.basicAuth.passwordFile'; then
+    options+=("-remoteWrite.basicAuth.passwordFile=$(bashio::config remoteWrite.basicAuth.passwordFile)")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.basicAuth.passwordFile=$(bashio::config remoteWrite.basicAuth.passwordFile)"
+  fi
+
+  if bashio::config.has_value 'remoteWrite.bearerToken'; then
+    options+=("-remoteWrite.bearerToken=$(bashio::config remoteWrite.bearerToken)")
+     bashio::log.debug "remoteWrite authentication enabled, option set: --remoteWrite.bearerToken=secret"
+  fi
+
+  if bashio::config.has_value 'remoteWrite.bearerTokenFile'; then
+    options+=("-remoteWrite.bearerTokenFile=$(bashio::config remoteWrite.bearerTokenFile)")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.bearerTokenFile=$(bashio::config remoteWrite.bearerTokenFile)"
+  fi
+
+  if bashio::config.has_value 'remoteWrite.tlsCAFile'; then
+    options+=("-remoteWrite.tlsCAFile=$(bashio::config remoteWrite.tlsCAFile)")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsCAFile=$(bashio::config remoteWrite.tlsCAFile)"
+  fi
+
+  if bashio::config.has_value 'remoteWrite.tlsCertFile'; then
+    options+=("-remoteWrite.tlsCertFile=$(bashio::config remoteWrite.tlsCertFile)")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsCertFile=$(bashio::config remoteWrite.tlsCertFile)"
+  fi
+
+  if bashio::config.has_value 'remoteWrite.tlsInsecureSkipVerify'; then
+    options+=("-remoteWrite.tlsInsecureSkipVerify=$(bashio::config remoteWrite.tlsInsecureSkipVerify)")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsInsecureSkipVerify=$(bashio::config remoteWrite.tlsInsecureSkipVerify)"
+  fi
+
+  if bashio::config.has_value 'remoteWrite.tlsKeyFile'; then
+    options+=("-remoteWrite.tlsKeyFile=$(bashio::config remoteWrite.tlsKeyFile)")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsKeyFile=$(bashio::config remoteWrite.tlsKeyFile)"
+  fi
+
+  if bashio::config.has_value 'remoteWrite.tlsServerName'; then
+    options+=("-remoteWrite.tlsServerName=$(bashio::config remoteWrite.tlsServerName)")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsServerName=$(bashio::config remoteWrite.tlsServerName)"
+  fi
 fi
 
 if bashio::config.true 'httpAuth.enabled'; then
   options+=("-httpAuth.username=$(bashio::config httpAuth.username)")
   options+=("-httpAuth.password=$(bashio::config httpAuth.password)")
-  bashio::log.info "httpAuth enabled, options set: -httpAuth.username=$(bashio::config httpAuth.username), -httpAuth.password=hidden"
+  bashio::log.debug "httpAuth enabled, options set: -httpAuth.username=$(bashio::config httpAuth.username), -httpAuth.password=secret"
 fi
 
 if bashio::config.has_value 'httpListenAddr.tcp'; then
   options+=("-httpListenAddr=$(bashio::config httpListenAddr.tcp)")
-  bashio::log.info "httpListenAddr enabled, option set: -httpListenAddr=$(bashio::config httpListenAddr.tcp)"
+  bashio::log.debug "httpListenAddr enabled, option set: -httpListenAddr=$(bashio::config httpListenAddr.tcp)"
 fi
 
 if bashio::config.has_value 'httpListenAddr.useProxyProtocol'; then
   options+=("-httpListenAddr.useProxyProtocol=$(bashio::config httpListenAddr.useProxyProtocol)")
-  bashio::log.info "httpListenAddr.useProxyProtocol enabled, option set: -httpListenAddr.useProxyProtocol=$(bashio::config httpListenAddr.useProxyProtocol)"
+  bashio::log.debug "httpListenAddr.useProxyProtocol enabled, option set: -httpListenAddr.useProxyProtocol=$(bashio::config httpListenAddr.useProxyProtocol)"
 fi
 
 if bashio::config.true 'tls.enabled'; then
@@ -41,10 +91,11 @@ if bashio::config.true 'tls.enabled'; then
   options+=("-tlsCertFile=$(bashio::config tls.certFile)")
   options+=("-tlsKeyFile=$(bashio::config tls.keyFile)")
   options+=("-tlsMinVersion=$(bashio::config tls.minVersion)")
-  bashio::log.info "TLS enabled, options set: -tls, -tlsCertFile=$(bashio::config tls.certFile), -tlsKeyFile=$(bashio::config tls.keyFile), -tlsMinVersion=$(bashio::config tls.minVersion)"
+  bashio::log.debug "TLS enabled, options set: -tls, -tlsCertFile=$(bashio::config tls.certFile), -tlsKeyFile=$(bashio::config tls.keyFile), -tlsMinVersion=$(bashio::config tls.minVersion)"
 fi
 
-bashio::log.info "Options: ${options[@]}"
+#WARNING! This will log all secrets in plaintext
+#bashio::log.trace "Options: ${options[@]}"
 
 ## Run your program
 exec /vmagent-prod  "${options[@]}"

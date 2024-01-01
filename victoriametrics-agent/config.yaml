@@ -20,7 +20,18 @@ map:
 
 options:
   remoteWrite:
-    url: "http://[victoriametrics-host-ip]/api/v1/write"
+    url: "http://[victoriametrics-host-ip]:8428/api/v1/write"
+    authentication.enabled: false
+    basicAuth.username: ""
+    basicAuth.password: ""
+    basicAuth.passwordFile: ""
+    bearerToken: ""
+    bearerTokenFile: ""
+    tlsCAFile: ""
+    tlsCertFile: ""
+    tlsInsecureSkipVerify: ""
+    tlsKeyFile: ""
+    tlsServerName: ""
 
   promscrape:
     enabled: false
@@ -45,6 +56,17 @@ options:
 schema:
   remoteWrite:
     url: str?
+    authentication.enabled: bool
+    basicAuth.username: str?
+    basicAuth.password: password?
+    basicAuth.passwordFile: str?
+    bearerToken: str?
+    bearerTokenFile: str?
+    tlsCAFile: str?
+    tlsCertFile: str?
+    tlsInsecureSkipVerify: str?
+    tlsKeyFile: str?
+    tlsServerName: str?
 
   promscrape:
     enabled: bool
