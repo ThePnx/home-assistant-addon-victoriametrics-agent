@@ -19,6 +19,8 @@ map:
   - share:rw
 
 options:
+  log_level: info
+
   remoteWrite:
     url: "http://[victoriametrics-host-ip]:8428/api/v1/write"
     authentication.enabled: false
@@ -54,6 +56,8 @@ options:
     minVersion: "TLS13"
 
 schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+
   remoteWrite:
     url: str?
     authentication.enabled: bool
