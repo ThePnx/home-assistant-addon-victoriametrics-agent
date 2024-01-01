@@ -24,9 +24,9 @@ options:
   remoteWrite:
     url: "http://[victoriametrics-host-ip]:8428/api/v1/write"
     authenticationEnabled: false
-    basicAuth.username: ""
-    basicAuth.password: ""
-    basicAuth.passwordFile: ""
+    basicAuthUsername: ""
+    basicAuthPassword: ""
+    basicAuthPasswordFile: ""
     bearerToken: ""
     bearerTokenFile: ""
     tlsCAFile: ""
@@ -61,9 +61,9 @@ schema:
   remoteWrite:
     url: str?
     authenticationEnabled: bool
-    basicAuth.username: str?
-    basicAuth.password: password?
-    basicAuth.passwordFile: str?
+    basicAuthUsername: str?
+    basicAuthPassword: password?
+    basicAuthPasswordFile: str?
     bearerToken: str?
     bearerTokenFile: str?
     tlsCAFile: str?
