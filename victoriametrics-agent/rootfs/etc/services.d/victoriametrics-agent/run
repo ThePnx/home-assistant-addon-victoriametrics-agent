@@ -64,17 +64,17 @@ fi
 if bashio::config.true 'remoteWrite.authenticationEnabled'; then
    bashio::log.debug "User evaluation=$(bashio::config.has_value 'remoteWrite.basicAuthUsername')"
   if bashio::config.has_value 'remoteWrite.basicAuthUsername'; then
-    options+=("-remoteWrite.basicAuthUsername=$(bashio::config 'remoteWrite.basicAuthUsername')")
+    options+=("-remoteWrite.basicAuth.username=$(bashio::config 'remoteWrite.basicAuthUsername')")
      bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.basicAuthUsername=$(bashio::config 'remoteWrite.basicAuthUsername')"
   fi
 
   if bashio::config.has_value 'remoteWrite.basicAuthPassword'; then
-    options+=("-remoteWrite.basicAuthPassword=$(bashio::config 'remoteWrite.basicAuthPassword')")
+    options+=("-remoteWrite.basicAuth.password=$(bashio::config 'remoteWrite.basicAuthPassword')")
      bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.basicAuthPassword=secret"
   fi
 
   if bashio::config.has_value 'remoteWrite.basicAuthPasswordFile'; then
-    options+=("-remoteWrite.basicAuthPasswordFile=$(bashio::config 'remoteWrite.basicAuthPasswordFile')")
+    options+=("-remoteWrite.basicAuth.passwordFile=$(bashio::config 'remoteWrite.basicAuthPasswordFile')")
     bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.basicAuthPasswordFile=$(bashio::config 'remoteWrite.basicAuthPasswordFile')"
   fi
 
