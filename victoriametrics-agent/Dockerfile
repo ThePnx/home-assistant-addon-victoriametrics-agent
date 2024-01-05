@@ -7,7 +7,6 @@ FROM $VMAGENT_IMAGE as vmagent
 FROM $BUILD_FROM
 
 COPY rootfs /
-COPY /etc/ssl/certs/VicMetServer.crt /etc/ssl/certs/VicMetServer.crt
 COPY --from=vmagent /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=vmagent ./vmagent-prod ./vmagent-prod
 
