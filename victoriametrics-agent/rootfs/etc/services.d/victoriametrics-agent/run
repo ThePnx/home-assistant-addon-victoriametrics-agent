@@ -6,7 +6,7 @@
 
 declare -a options
 declare log_level
-declare certFile
+
 
 # Check if the log level configuration option exists
 if bashio::config.exists log_level; then
@@ -95,7 +95,7 @@ if bashio::config.true 'remoteWrite.authenticationEnabled'; then
   fi
 
   if bashio::config.has_value 'remoteWrite.tlsCertFile'; then
-    exec echo "${certFile}" > certFile.crt
+    exec echo "$(bashio::config 'remoteWrite.tlsCertFile')" > certFile.crt
 #    options+=("-remoteWrite.tlsCertFile=$(bashio::config 'remoteWrite.tlsCertFile')")
     options+=("-remoteWrite.tlsCertFile=certFile.crt")
     bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsCertFile=$(bashio::config 'remoteWrite.tlsCertFile')"
