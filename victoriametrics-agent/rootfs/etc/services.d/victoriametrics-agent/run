@@ -6,7 +6,7 @@
 
 declare -a options
 declare log_level
-declre certFile
+declare certFile
 
 # Check if the log level configuration option exists
 if bashio::config.exists log_level; then
