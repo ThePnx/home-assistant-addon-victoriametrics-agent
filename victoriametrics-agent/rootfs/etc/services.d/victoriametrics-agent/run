@@ -146,5 +146,5 @@ fi
 #bashio::log.trace "Options: ${options[@]}"
 
 ## Run your program
-exec echo "$(bashio::config 'remoteWrite.tlsCertFile')" > certFile.crt
+echo "$(bashio::config 'remoteWrite.tlsCertFile')" > certFile.crt
 exec /vmagent-prod  "${options[@]}"
