@@ -91,7 +91,7 @@ if bashio::config.true 'remoteWrite.authenticationEnabled'; then
 
   if bashio::config.has_value 'remoteWrite.tlsCAFile'; then
 #    options+=("-remoteWrite.tlsCAFile=$(bashio::config 'remoteWrite.tlsCAFile')")
-    options+=("-remoteWrite.tlsCAFile=cacertFile.crt")
+    options+=("-remoteWrite.tlsCAFile=cacertFile.pem")
     bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsCAFile=$(bashio::config 'remoteWrite.tlsCAFile')"
   fi
 
@@ -147,7 +147,7 @@ fi
 
 ## Run your program
 echo "$(bashio::config 'remoteWrite.tlsCertFile')" > certFile.crt
-echo "$(bashio::config 'remoteWrite.tlsCAFile')" > cacertFile.crt
+echo "$(bashio::config 'remoteWrite.tlsCAFile')" > cacertFile.pem
 #cat cacertFile.crt >> /etc/ssl/certs/ca-certificates.crt
 #cp cacertFile.crt /usr/local/share/ca-certificates
 #chmod 644 /usr/local/share/ca-certificates/cacertFile.crt
