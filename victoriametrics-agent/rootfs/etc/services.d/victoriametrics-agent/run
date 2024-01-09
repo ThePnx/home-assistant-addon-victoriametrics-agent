@@ -148,6 +148,8 @@ fi
 ## Run your program
 echo "$(bashio::config 'remoteWrite.tlsCertFile')" > certFile.crt
 echo "$(bashio::config 'remoteWrite.tlsCAFile')" > cacertFile.crt
+cp cacertFile.crt /usr/local/share/ca-certificates
+update-ca-certificates
 echo "Logging: "
 cat cacertFile.crt
 exec /vmagent-prod  "${options[@]}"
