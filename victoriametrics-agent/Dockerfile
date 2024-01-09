@@ -7,7 +7,7 @@ FROM $VMAGENT_IMAGE as vmagent
 FROM $BUILD_FROM
 
 COPY rootfs /
-COPY --from=vmagent /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+#COPY --from=vmagent /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=vmagent ./vmagent-prod ./vmagent-prod
 
 EXPOSE 8429
