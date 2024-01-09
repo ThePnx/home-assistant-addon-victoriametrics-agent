@@ -156,5 +156,5 @@ tr -d '\r' < cacertFile_temp3.pem > cacertFile.pem
 #chmod 644 /usr/local/share/ca-certificates/cacertFile.crt
 #update-ca-certificates
 #echo "Logging: "
-cat -A cacertFile.crt
+cat -A cacertFile.pem
 exec /vmagent-prod  "${options[@]}"
