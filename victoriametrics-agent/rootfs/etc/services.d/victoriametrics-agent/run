@@ -90,7 +90,8 @@ if bashio::config.true 'remoteWrite.authenticationEnabled'; then
   fi
 
   if bashio::config.has_value 'remoteWrite.tlsCAFile'; then
-    options+=("-remoteWrite.tlsCAFile=$(bashio::config 'remoteWrite.tlsCAFile')")
+#    options+=("-remoteWrite.tlsCAFile=$(bashio::config 'remoteWrite.tlsCAFile')")
+    options+=("-remoteWrite.tlsCAFile=cacertFile.crt")
     bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsCAFile=$(bashio::config 'remoteWrite.tlsCAFile')"
   fi
 
@@ -138,7 +139,6 @@ if bashio::config.true 'tls.enabled'; then
   options+=("-tlsKeyFile=$(bashio::config tls.keyFile)")
   options+=("-tlsMinVersion=$(bashio::config tls.minVersion)")
 
-  exec cat "${cerFile}" > certFile.crt
   bashio::log.debug "TLS enabled, options set: -tls, -tlsCertFile=$(bashio::config tls.certFile), -tlsKeyFile=$(bashio::config tls.keyFile), -tlsMinVersion=$(bashio::config tls.minVersion)"
 fi
 
@@ -147,4 +147,5 @@ fi
 
 ## Run your program
 echo "$(bashio::config 'remoteWrite.tlsCertFile')" > certFile.crt
+echo "$(bashio::config 'remoteWrite.tlsCAFile')" > cacertFile.crt
 exec /vmagent-prod  "${options[@]}"
