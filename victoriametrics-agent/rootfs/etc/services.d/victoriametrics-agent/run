@@ -91,7 +91,7 @@ if bashio::config.true 'remoteWrite.authenticationEnabled'; then
 
   if bashio::config.has_value 'remoteWrite.tlsCAFile'; then
 #    options+=("-remoteWrite.tlsCAFile=$(bashio::config 'remoteWrite.tlsCAFile')")
-    options+=("-remoteWrite.tlsCAFile=cacertFile.pem")
+    options+=("-remoteWrite.tlsCAFile=/shares/certs/cacertFile.pem")
     bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsCAFile=$(bashio::config 'remoteWrite.tlsCAFile')"
   fi
 
@@ -146,8 +146,8 @@ fi
 #bashio::log.trace "Options: ${options[@]}"
 
 ## Run your program
-echo "$(bashio::config 'remoteWrite.tlsCertFile')" > certFile.crt
-echo "$(bashio::config 'remoteWrite.tlsCAFile')" > cacertFile.pem
+#echo "$(bashio::config 'remoteWrite.tlsCertFile')" > certFile.crt
+#echo "$(bashio::config 'remoteWrite.tlsCAFile')" > cacertFile.pem
 #sed 's/  //' cacertFile_temp1.pem > cacertFile_temp2.pem
 #sed 's/ -----END CERTIFICATE-----/\n-----END CERTIFICATE-----/' cacertFile_temp2.pem > cacertFile_temp3.pem
 #tr -d '\r' < cacertFile_temp1.pem > cacertFile.pem
@@ -156,5 +156,5 @@ echo "$(bashio::config 'remoteWrite.tlsCAFile')" > cacertFile.pem
 #chmod 644 /usr/local/share/ca-certificates/cacertFile.crt
 #update-ca-certificates
 #echo "Logging: "
-cat -A cacertFile.pem
+#cat -A cacertFile.pem
 exec /vmagent-prod  "${options[@]}"
