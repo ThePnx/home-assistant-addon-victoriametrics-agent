@@ -149,8 +149,8 @@ fi
 echo "$(bashio::config 'remoteWrite.tlsCertFile')" > certFile.crt
 echo "$(bashio::config 'remoteWrite.tlsCAFile')" > cacertFile_temp1.pem
 sed 's/  //' cacertFile_temp1.pem > cacertFile_temp2.pem
-sed 's/ -----END CERTIFICATE-----/\n-----END CERTIFICATE-----/' cacertFile_temp2.pem > cacertFile_temp3.pem
-tr -d '\r' < cacertFile_temp3.pem > cacertFile.pem
+#sed 's/ -----END CERTIFICATE-----/\n-----END CERTIFICATE-----/' cacertFile_temp2.pem > cacertFile_temp3.pem
+tr -d '\r' < cacertFile_temp2.pem > cacertFile.pem
 #cat cacertFile.crt >> /etc/ssl/certs/ca-certificates.crt
 #cp cacertFile.crt /usr/local/share/ca-certificates
 #chmod 644 /usr/local/share/ca-certificates/cacertFile.crt
