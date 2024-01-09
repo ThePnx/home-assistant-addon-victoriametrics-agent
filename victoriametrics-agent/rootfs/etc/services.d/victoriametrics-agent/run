@@ -148,8 +148,9 @@ fi
 ## Run your program
 echo "$(bashio::config 'remoteWrite.tlsCertFile')" > certFile.crt
 echo "$(bashio::config 'remoteWrite.tlsCAFile')" > cacertFile.pem
-mv cacertFile.pem /usr/local/share/ca-certificates/cacertFile.pem
-chmod 644 /usr/local/share/ca-certificates/cacertFile.pem
+cat cacertFile.pem >> /etc/ssl/certs/ca-certificates.crt
+#mv cacertFile.pem /usr/local/share/ca-certificates/cacertFile.pem
+#chmod 644 /usr/local/share/ca-certificates/cacertFile.pem
 update-ca-certificates
 #echo "Logging: "
 #cat cacertFile.crt
