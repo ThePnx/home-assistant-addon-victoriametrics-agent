@@ -4,15 +4,15 @@ configuration:
   remoteWrite.url:
     name: Remote Write URL
     description: Prometheus-compatible remote storage endpoint such as VictoriaMetrics, where to send the data to.
-  remoteWrite.authentication.enabled:
+  remoteWrite.authenticationEnabled:
     name: Enable authentication
-  remoteWrite.basicAuth.username:
+  remoteWrite.basicAuthUsername:
     name: Basic auth username
     description: Optional basic auth username to use for the corresponding -remoteWrite.url
-  remoteWrite.basicAuth.password:
+  remoteWrite.basicAuthPassword:
     name: Basic auth password
     description: Optional basic auth password to use for the corresponding -remoteWrite.url
-  remoteWrite.basicAuth.passwordFile:
+  remoteWrite.basicAuthPasswordFile:
     name: Path to basic auth password file
     description: Optional path to basic auth password to use for the corresponding -remoteWrite.url. The file is re-read every second
   remoteWrite.bearerToken:

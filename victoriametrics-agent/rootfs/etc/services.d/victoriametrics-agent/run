@@ -61,56 +61,57 @@ else
     bashio::log.debug "remoteWrite.url enabled, option set: -remoteWrite.url=$(bashio::config 'remoteWrite.url')"
 fi
 
-if bashio::config.true 'remoteWrite.authentication.enabled'; then
+bashio::log.debug "Remote Write authentication enabled flag to = $(bashio::config 'remoteWrite.authenticationEnabled')"
 
-  if bashio::config.has_value 'remoteWrite.basicAuth.username'; then
-    options+=("-remoteWrite.basicAuth.username=$(bashio::config remoteWrite.basicAuth.username)")
-     bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.basicAuth.username=$(bashio::config remoteWrite.basicAuth.username)"
+if bashio::config.true 'remoteWrite.authenticationEnabled'; then
+  if bashio::config.has_value 'remoteWrite.basicAuthUsername'; then
+    options+=("-remoteWrite.basicAuth.username=$(bashio::config 'remoteWrite.basicAuthUsername')")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.basicAuth.username=$(bashio::config 'remoteWrite.basicAuthUsername')"
   fi
 
-  if bashio::config.has_value 'remoteWrite.basicAuth.password'; then
-    options+=("-remoteWrite.basicAuth.password=$(bashio::config remoteWrite.basicAuth.password)")
-     bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.basicAuth.password=secret"
+  if bashio::config.has_value 'remoteWrite.basicAuthPassword'; then
+    options+=("-remoteWrite.basicAuth.password=$(bashio::config 'remoteWrite.basicAuthPassword')")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.basicAuth.password=secret"
   fi
 
-  if bashio::config.has_value 'remoteWrite.basicAuth.passwordFile'; then
-    options+=("-remoteWrite.basicAuth.passwordFile=$(bashio::config remoteWrite.basicAuth.passwordFile)")
-    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.basicAuth.passwordFile=$(bashio::config remoteWrite.basicAuth.passwordFile)"
+  if bashio::config.has_value 'remoteWrite.basicAuthPasswordFile'; then
+    options+=("-remoteWrite.basicAuth.passwordFile=$(bashio::config 'remoteWrite.basicAuthPasswordFile')")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.basicAuth.passwordFile=$(bashio::config 'remoteWrite.basicAuthPasswordFile')"
   fi
 
   if bashio::config.has_value 'remoteWrite.bearerToken'; then
-    options+=("-remoteWrite.bearerToken=$(bashio::config remoteWrite.bearerToken)")
-     bashio::log.debug "remoteWrite authentication enabled, option set: --remoteWrite.bearerToken=secret"
+    options+=("-remoteWrite.bearerToken=$(bashio::config 'remoteWrite.bearerToken')")
+    bashio::log.debug "remoteWrite authentication enabled, option set: --remoteWrite.bearerToken=secret"
   fi
 
   if bashio::config.has_value 'remoteWrite.bearerTokenFile'; then
-    options+=("-remoteWrite.bearerTokenFile=$(bashio::config remoteWrite.bearerTokenFile)")
-    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.bearerTokenFile=$(bashio::config remoteWrite.bearerTokenFile)"
+    options+=("-remoteWrite.bearerTokenFile=$(bashio::config 'remoteWrite.bearerTokenFile')")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.bearerTokenFile=$(bashio::config 'remoteWrite.bearerTokenFile')"
   fi
 
   if bashio::config.has_value 'remoteWrite.tlsCAFile'; then
-    options+=("-remoteWrite.tlsCAFile=$(bashio::config remoteWrite.tlsCAFile)")
-    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsCAFile=$(bashio::config remoteWrite.tlsCAFile)"
+    options+=("-remoteWrite.tlsCAFile=$(bashio::config 'remoteWrite.tlsCAFile')")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsCAFile=$(bashio::config 'remoteWrite.tlsCAFile')"
   fi
 
   if bashio::config.has_value 'remoteWrite.tlsCertFile'; then
-    options+=("-remoteWrite.tlsCertFile=$(bashio::config remoteWrite.tlsCertFile)")
-    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsCertFile=$(bashio::config remoteWrite.tlsCertFile)"
+    options+=("-remoteWrite.tlsCertFile=$(bashio::config 'remoteWrite.tlsCertFile')")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsCertFile=$(bashio::config 'remoteWrite.tlsCertFile')"
   fi
 
   if bashio::config.has_value 'remoteWrite.tlsInsecureSkipVerify'; then
-    options+=("-remoteWrite.tlsInsecureSkipVerify=$(bashio::config remoteWrite.tlsInsecureSkipVerify)")
-    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsInsecureSkipVerify=$(bashio::config remoteWrite.tlsInsecureSkipVerify)"
+    options+=("-remoteWrite.tlsInsecureSkipVerify=$(bashio::config 'remoteWrite.tlsInsecureSkipVerify')")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsInsecureSkipVerify=$(bashio::config 'remoteWrite.tlsInsecureSkipVerify')"
   fi
 
   if bashio::config.has_value 'remoteWrite.tlsKeyFile'; then
-    options+=("-remoteWrite.tlsKeyFile=$(bashio::config remoteWrite.tlsKeyFile)")
-    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsKeyFile=$(bashio::config remoteWrite.tlsKeyFile)"
+    options+=("-remoteWrite.tlsKeyFile=$(bashio::config 'remoteWrite.tlsKeyFile')")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsKeyFile=$(bashio::config 'remoteWrite.tlsKeyFile')"
   fi
 
   if bashio::config.has_value 'remoteWrite.tlsServerName'; then
-    options+=("-remoteWrite.tlsServerName=$(bashio::config remoteWrite.tlsServerName)")
-    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsServerName=$(bashio::config remoteWrite.tlsServerName)"
+    options+=("-remoteWrite.tlsServerName=$(bashio::config 'remoteWrite.tlsServerName')")
+    bashio::log.debug "remoteWrite authentication enabled, option set: -remoteWrite.tlsServerName=$(bashio::config 'remoteWrite.tlsServerName')"
   fi
 fi
 
