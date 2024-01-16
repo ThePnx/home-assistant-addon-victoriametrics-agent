@@ -34,6 +34,9 @@ options:
     tlsInsecureSkipVerify: ""
     tlsKeyFile: ""
     tlsServerName: ""
+    tmpDataPath: ""
+    maxDiskUsagePerURL: "500MB"
+    vmProtoCompressLevel: ""
 
   promscrape:
     enabled: false
@@ -71,6 +74,9 @@ schema:
     tlsInsecureSkipVerify: str?
     tlsKeyFile: str?
     tlsServerName: str?
+    tmpDataPath: str?
+    maxDiskUsagePerURL: str?
+    vmProtoCompressLevel: str?
 
   promscrape:
     enabled: bool

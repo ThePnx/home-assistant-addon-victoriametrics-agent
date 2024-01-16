@@ -115,6 +115,21 @@ if bashio::config.true 'remoteWrite.authenticationEnabled'; then
   fi
 fi
 
+if bashio::config.has_value 'remoteWrite.tmpDataPath'; then
+  options+=("-remoteWrite.tmpDataPath=$(bashio::config 'remoteWrite.tmpDataPath')")
+  bashio::log.debug "Option set: -remoteWrite.tmpDataPath=$(bashio::config 'remoteWrite.tmpDataPath')"
+fi
+
+if bashio::config.has_value 'remoteWrite.maxDiskUsagePerURL'; then
+  options+=("-remoteWrite.maxDiskUsagePerURL=$(bashio::config 'remoteWrite.maxDiskUsagePerURL')")
+  bashio::log.debug "Option set: -remoteWrite.maxDiskUsagePerURL=$(bashio::config 'remoteWrite.maxDiskUsagePerURL')"
+fi
+
+if bashio::config.has_value 'remoteWrite.vmProtoCompressLevel'; then
+  options+=("-remoteWrite.vmProtoCompressLevel=$(bashio::config 'remoteWrite.vmProtoCompressLevel')")
+  bashio::log.debug "Option set: -remoteWrite.vmProtoCompressLevel=$(bashio::config 'remoteWrite.vmProtoCompressLevel')"
+fi
+
 if bashio::config.true 'httpAuth.enabled'; then
   options+=("-httpAuth.username=$(bashio::config httpAuth.username)")
   options+=("-httpAuth.password=$(bashio::config httpAuth.password)")

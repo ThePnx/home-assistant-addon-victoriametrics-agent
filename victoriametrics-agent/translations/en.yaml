@@ -36,6 +36,15 @@ configuration:
   remoteWrite.tlsServerName:
     name: TLS server name
     description: Optional TLS server name to use for connections to the corresponding -remoteWrite.url. By default, the server name from -remoteWrite.url is used
+  remoteWrite.tmpDataPath:
+    name: Temporary data directory path
+    description: Path to directory for storing pending data, which isn't sent to the configured -remoteWrite.url . See also -remoteWrite.maxDiskUsagePerURL and -remoteWrite.disableOnDiskQueue (default "vmagent-remotewrite-data")
+  remoteWrite.maxDiskUsagePerURL:
+    name: The maximum file-based buffer size in bytes
+    description: The maximum file-based buffer size in bytes at -remoteWrite.tmpDataPath for each -remoteWrite.url. When buffer size reaches the configured maximum, then old data is dropped when adding new data to the buffer. Buffered data is stored in ~500MB chunks. It is recommended to set the value for this flag to a multiple of the block size 500MB. Disk usage is unlimited if the value is set to 0. Supports the following optional suffixes for size values KB, MB, GB, TB, KiB, MiB, GiB, TiB. (default 0). Supports array of values separated by comma or specified via multiple flags.
+  remoteWrite.vmProtoCompressLevel:
+    name: The compression level for VictoriaMetrics remote write protocol
+    description: Higher values reduce network traffic at the cost of higher CPU usage. Negative values reduce CPU usage at the cost of increased network traffic. Bigger values reduce network usage at the cost of higher CPU usage. Negative values reduce CPU usage at the cost of higher network usage. The default value for the compression level is 3, and the maximum value is 22. See https://docs.victoriametrics.com/vmagent.html#victoriametrics-remote-write-protocol
 
   promscrape.enabled:
     name: Enable Prometheus config file usage
