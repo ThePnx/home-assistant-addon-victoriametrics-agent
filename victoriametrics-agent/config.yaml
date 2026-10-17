@@ -1,5 +1,5 @@
 name: VictoriaMetrics Agent Addon for Home Assistant
-version: "0.1"
+version: "0.2"
 slug: victoriametrics_agent
 description: VictoriaMetrics Agent Addon for Home Assistant
 url: "https://github.com/ThePnx/home-assistant-addon-victoriametrics-agent"
@@ -34,7 +34,7 @@ options:
     tlsInsecureSkipVerify: ""
     tlsKeyFile: ""
     tlsServerName: ""
-    tmpDataPath: ""
+    tmpDataPath: "/data/vmagent-remotewrite-data"
     maxDiskUsagePerURL: "500MB"
     vmProtoCompressLevel: ""
 
@@ -54,8 +54,8 @@ options:
 
   tls:
     enabled: false
-    certFile: "/path/to/cert/file"
-    keyFile: "/path/to/key/file"
+    certFile: ""
+    keyFile: ""
     minVersion: "TLS13"
 
 schema:
