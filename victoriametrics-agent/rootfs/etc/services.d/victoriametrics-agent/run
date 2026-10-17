@@ -115,9 +115,14 @@ if bashio::config.true 'remoteWrite.authenticationEnabled'; then
   fi
 fi
 
+# The queue must live under /data: everything else is lost when the add-on container is recreated (restart,
+# update). vmagent's own default is the relative "vmagent-remotewrite-data", i.e. inside the container.
 if bashio::config.has_value 'remoteWrite.tmpDataPath'; then
   options+=("-remoteWrite.tmpDataPath=$(bashio::config 'remoteWrite.tmpDataPath')")
   bashio::log.debug "Option set: -remoteWrite.tmpDataPath=$(bashio::config 'remoteWrite.tmpDataPath')"
+else
+  options+=("-remoteWrite.tmpDataPath=/data/vmagent-remotewrite-data")
+  bashio::log.debug "Option set (default): -remoteWrite.tmpDataPath=/data/vmagent-remotewrite-data"
 fi
 
 if bashio::config.has_value 'remoteWrite.maxDiskUsagePerURL'; then
