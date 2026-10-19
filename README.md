@@ -5,7 +5,7 @@
 This add-on runs [vmagent](https://docs.victoriametrics.com/victoriametrics/vmagent/), the metrics agent of
 VictoriaMetrics, next to Home Assistant. It accepts metrics from Home Assistant and sends them to an
 **external** [VictoriaMetrics](https://docs.victoriametrics.com/victoriametrics/single-server-victoriametrics/)
-database, so you can keep years of sensor history without storing it on the Home Assistant machine.
+database.
 
 Supported architectures: `aarch64`, `amd64`, `armhf`, `armv7`, `i386`.
 
@@ -27,15 +27,6 @@ Home Assistant --(InfluxDB integration)--> vmagent add-on :8429 --(remote write)
 ```
 
 ## Why vmagent and an external VictoriaMetrics
-
-**Why an external database**
-
-- The Home Assistant recorder is made for recent history (10 days by default). A time series database is made
-  for years of data.
-- The data lives off the Home Assistant machine: less disk wear (important on SD cards and small SSDs), smaller
-  Home Assistant backups, and the history survives a reinstall of Home Assistant.
-- One database can hold metrics from Home Assistant and from the rest of your network (servers, routers,
-  exporters), and you query all of it with PromQL/MetricsQL, for example in Grafana.
 
 **Why VictoriaMetrics**
 
@@ -107,7 +98,7 @@ remoteWrite:
   url: "http://victoriametrics.local:8428/api/v1/write"
   authenticationEnabled: false
   tmpDataPath: "/data/vmagent-remotewrite-data"
-  maxDiskUsagePerURL: "500MB"
+  maxDiskUsagePerURL: "100MB"
 promscrape:
   enabled: false
 httpAuth:
