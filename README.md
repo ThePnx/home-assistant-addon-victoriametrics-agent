@@ -98,7 +98,7 @@ remoteWrite:
   url: "http://victoriametrics.local:8428/api/v1/write"
   authenticationEnabled: false
   tmpDataPath: "/data/vmagent-remotewrite-data"
-  maxDiskUsagePerURL: "100MB"
+  maxDiskUsagePerURL: "500MB"
 promscrape:
   enabled: false
 httpAuth:
